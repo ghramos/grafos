@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 public class Vertice {
 
-	private int nome;
+	private String nome;
 	private Color cor;
 	private int distancia;
 	private int fRetorno;
 	private Vertice pai;
 	private ArrayList<Vertice> verticesAdjacentes;
 
-	public Vertice(int nome, Color cor, int distancia, int fRetorno, Vertice pai,
-			ArrayList<Vertice> verticesAdjacentes) {
+	public Vertice(String nome) {
 		setNome(nome);
 		setCor(Color.BRANCO);
 		setDistancia(0);
@@ -21,7 +20,7 @@ public class Vertice {
 		this.verticesAdjacentes = new ArrayList<Vertice>();
 	}
 
-	public int getNome() {
+	public String getNome() {
 		return nome;
 	}
 
@@ -45,7 +44,7 @@ public class Vertice {
 		return verticesAdjacentes;
 	}
 
-	public void setNome(int nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 

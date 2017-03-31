@@ -11,7 +11,12 @@ public class Grafo {
 	private int ordem;// quantidade de vertices
 	private int tamanho;// quantidade de arestas
 	private int tempo;
+	private boolean possuiCiclo;
 	private boolean digrafo;
+
+	public Grafo() {
+		possuiCiclo = false;
+	}
 
 	public HashMap<Integer, Vertice> getGrafo() {
 		return grafo;
@@ -61,6 +66,9 @@ public class Grafo {
 		this.digrafo = digrafo;
 	}
 
+	public boolean isPossuiCiclo() {
+		return possuiCiclo;
+	}
 	// Metodos auxiliares
 
 	public void addVertice(int key, Vertice v) {
@@ -95,6 +103,8 @@ public class Grafo {
 		for (Vertice v : U.getVerticesAdjacentes()) {
 			if (v.getCor() == Color.BRANCO)
 				DFSVISIT(v);
+			else if (v.getCor() == Color.CINZA)
+				possuiCiclo = true;
 		}
 		U.setCor(Color.PRETO);
 		tempo += 1;
