@@ -79,6 +79,14 @@ public class Grafo {
 		return grafo.get(i);
 	}
 
+	public Vertice getVertice() {
+		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {
+			return entry.getValue();
+		}
+		return null;
+
+	}
+
 	public String getSequenciaDeGraus() {
 		ArrayList<Integer> a = new ArrayList<>();
 		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {

@@ -16,33 +16,35 @@ public class Questao03 {
 	public static void main(String[] args) throws IOException {
 		Grafo g = new Grafo();
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		String[] str = input.readLine().split(" ");
-		String print = "";
+		int T = Integer.parseInt(input.readLine()); // número de testes
 
-		int n = Integer.parseInt(str[0]);// número de documentos
-		int m = Integer.parseInt(str[1]);// número de dependências existentes
+		for (int j = 0; j < T; j++) { // repete ate qtdade de teste
 
-		while (n != 0 & m != 0) {
+			input = new BufferedReader(new InputStreamReader(System.in));
+			String[] str = input.readLine().split(" ");
 
-			for (int i = 1; i <= n; i++) {// Instancia os vertices
+			int N = Integer.parseInt(str[0]);// número de documentos
+			int M = Integer.parseInt(str[1]);// número de dependências
+
+			for (int i = 1; i <= N; i++) {// Instancia os vertices
 				g.addVertice(i, new Vertice(String.valueOf(i)));
 			}
 
-			for (int i = 0; i < m; i++) {// Faz a ligacao dos vertices
+			for (int i = 0; i < M; i++) {// Faz a ligacao dos vertices
 				str = input.readLine().split(" ");
 
-				Vertice a = g.getVertice(Integer.parseInt(str[0]));
-				Vertice b = g.getVertice(Integer.parseInt(str[1]));
+				Vertice A = g.getVertice(Integer.parseInt(str[0]));
+				Vertice B = g.getVertice(Integer.parseInt(str[1]));
 
-				a.AddVerticeAdjacente(b);
-				// b.AddVerticeAdjacente(a);
+				A.AddVerticeAdjacente(B);
 			}
+			g.DFS(g.getVertice());
+			if (g.isPossuiCiclo())
+				System.out.println("SIM");
+			else
+				System.out.println("NAO");
+			g = new Grafo();
 		}
-		if (g.isPossuiCiclo())
-			System.out.println("Sim");
-		else
-			System.out.println("Não");
-
 	}
 
 }
