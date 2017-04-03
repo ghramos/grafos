@@ -15,11 +15,11 @@ public class Questao01 {
 	public static void main(String[] args) throws IOException {
 		
 		//Dirigido\multigrafo
-		int matriz[][] = { {0,1,0,1,1}, 
+		int matriz[][] = { {0,1,0,0,2}, 
 						   {1,0,1,0,1},
 						   {0,1,0,1,1},
 						   {1,0,1,1,0},
-						   {1,0,1,1,1}
+						   {1,0,1,1,0}
 						   };
 		//Não dirigido- Simples
 		int matriz2[][] = {{0,1,0,1,1}, 
@@ -52,12 +52,11 @@ public class Questao01 {
 		boolean completo = true;
 		boolean nulo = true;
 		boolean bipartido = true;
-		
+		int totalColunaAnterior = 0;
 				
 		for (int i = 0; i < matriz.length; i++) {
-			int somaLinha = 0;
-			int somaColuna = 0;
-		
+			//int somaLinha = 0;
+			int somaColuna = 0;	
 		
 			for (int j = 0; j < matriz.length; j++) {
 				//System.out.println(i+":"+j);
@@ -81,24 +80,20 @@ public class Questao01 {
 					}
 				}
 				//verifica Rregular
-				if(regular){
-					if( i < matriz.length -1 && j < matriz.length -1){
-						if(matriz[i][j] != matriz[i+1][j+1]){
-							regular = false;
-						}
-						
-					}
-				}
-				
-			/*	if(matrizAdjacencia[i][j] != 0){
-					somaColuna = matrizAdjacencia[i][j] ;
-				}
-				
-				*/
-				
+				somaColuna += matriz[i][j] ;
 
 			}
+			totalColunaAnterior = somaColuna;
+			if(regular){
+				System.out.println(somaColuna+":"+ totalColunaAnterior);	
+				if(somaColuna != totalColunaAnterior ){
+					
+					regular = false;
+				}				
+			}
 			
+			System.out.println(somaColuna);			
+		
 		}
 		
 		if(simetria){
@@ -112,7 +107,10 @@ public class Questao01 {
 			Saida += "- Simples";
 		}
 		if(regular){
-			Saida += "- Multigrafo";
+			Saida += "-Regular";
+		}else{
+			Saida += "-NãoRegular";//para teste
+			
 		}
 			
 		
