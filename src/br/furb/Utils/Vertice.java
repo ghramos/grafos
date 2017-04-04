@@ -19,6 +19,8 @@ public class Vertice {
 		setPai(null);
 		this.verticesAdjacentes = new ArrayList<Vertice>();
 	}
+	
+	
 
 	public String getNome() {
 		return nome;
