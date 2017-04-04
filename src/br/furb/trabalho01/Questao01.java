@@ -19,6 +19,7 @@ public class Questao01 {
 		MatrizAdjacencia m0 = new MatrizAdjacencia(matriz0);
 		System.out.println(tipoDoGrafo(m0));
 		System.out.println(arestasDoGrafo(m0));
+		System.out.println(grausDoVertice(m0));
 
 		// Dirigido\multigrafo\regular
 		int matriz1[][] = { { 0, 1, 0, 0, 2 },
@@ -30,6 +31,7 @@ public class Questao01 {
 		MatrizAdjacencia m1 = new MatrizAdjacencia(matriz1);
 		System.out.println(tipoDoGrafo(m1));
 		System.out.println(arestasDoGrafo(m1));
+		System.out.println(grausDoVertice(m1));
 		
 		/*// Não dirigido- Simples\Não Regular
 		int matriz2[][] = { { 0, 1, 0, 1, 1 }, 
@@ -65,6 +67,7 @@ public class Questao01 {
 		MatrizAdjacencia m6 = new MatrizAdjacencia(matriz6);
 		System.out.println(tipoDoGrafo(m6));
 		System.out.println(arestasDoGrafo(m6));
+		System.out.println(grausDoVertice(m6));
 		
 		//Dirigido- Multigrado\Não Regular\bipartido
 		int matriz7[][] = { { 0, 3, 1, 1}, 
@@ -74,6 +77,7 @@ public class Questao01 {
 		MatrizAdjacencia m7 = new MatrizAdjacencia(matriz7);
 		System.out.println(tipoDoGrafo(m7));
 		System.out.println(arestasDoGrafo(m7));
+		System.out.println(grausDoVertice(m7));
 						
 		
 		//try {
@@ -149,21 +153,7 @@ public class Questao01 {
 						//completo = false;
 					}
 				}
-
-				somaLinha += matriz[i][j];
-				somaColuna[j] += matriz[i][j];
-
-				//Verifica Regularidade das colunas 
-				if (i == matriz.length - 1 && regular) {
-					// System.out.println("coluna:"+somaColuna[j]+":"+
-					
-					if (somaColuna[j] != totalColunaAnterior && j > 0) {
-						regular = false;
-
-					}
-					totalColunaAnterior = somaColuna[j];
-
-				}
+				
 				//Verifica Bipartido
 				if(bipartido){
 					if(matriz[i][j] !=0){						
@@ -194,7 +184,23 @@ public class Questao01 {
 						
 					}				
 					
-				}			
+				}				
+
+				somaLinha += matriz[i][j];
+				somaColuna[j] += matriz[i][j];
+
+				//Verifica Regularidade das colunas 
+				if (i == matriz.length - 1 && regular) {
+					// System.out.println("coluna:"+somaColuna[j]+":"+
+					
+					if (somaColuna[j] != totalColunaAnterior && j > 0) {
+						regular = false;
+					}
+					
+					totalColunaAnterior = somaColuna[j];
+
+				}
+							
 				
 
 			}		
@@ -297,16 +303,51 @@ public class Questao01 {
 
 	}
 
-	public static void grausDoVertice(MatrizAdjacencia m) {
+	public static String grausDoVertice(MatrizAdjacencia m) {
 		int[][] matriz = m.getMatriz();
+		boolean simetria = true;
+		String saidaD = "(";
+		String saidaEntrada ="(";
+		//int[] grauEntrada = new int[matriz.length];
+		int[] grauSaia = new int[matriz.length];
 		
-		for (int i = 0; i < matriz.length; i++) {			
+		for (int i = 0; i < matriz.length; i++) {	
+			int somaLinha = 0;
 			
-			for (int j = 0; j < matriz.length; j++) {				
-					
+			for (int j = 0; j < matriz.length; j++) {	
+				
+				// Verifica //dirigido Simetria
+				if (simetria) {
+					if (matriz[i][j] != matriz[j][i]) {
+						simetria = false;
+						//completo = false;
+					}
+				}			
+				
+				
+				somaLinha += matriz[i][j];
+				grauSaia[i] += matriz[i][j];
+				if(simetria){
+					if (i == matriz.length - 1){
+						saidaEntrada += "grauEntrada(" +m.getVertices()[j] +")="+grauSaia[i]+" ;";					
+					  //grauEntrada[i] += somaLinha;
+					}
+				}
 												
-			}	
+			}
+			saidaD += "grau(" + m.getVertices()[i] +")="+somaLinha+" ;";	
+			
+		}		
+		String saida = null;
+		if(simetria){
+			saida = saidaEntrada;
+			saida = saidaD;
+		}else{
+			saida = saidaD ;
 		}
+		
+		
+		return saida;
 
 	}
 
