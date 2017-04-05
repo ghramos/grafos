@@ -17,6 +17,7 @@ public class Questao01 {
 							{1,1,0,1},
 							{1,1,1,0}};
 		MatrizAdjacencia m0 = new MatrizAdjacencia(matriz0);
+		System.out.println("\nM0");
 		System.out.println(tipoDoGrafo(m0));
 		System.out.println(arestasDoGrafo(m0));
 		System.out.println(grausDoVertice(m0));
@@ -29,42 +30,66 @@ public class Questao01 {
 							{ 1, 1, 0, 1, 0 } };
 		
 		MatrizAdjacencia m1 = new MatrizAdjacencia(matriz1);
+		System.out.println("\nM1");
 		System.out.println(tipoDoGrafo(m1));
 		System.out.println(arestasDoGrafo(m1));
 		System.out.println(grausDoVertice(m1));
 		
-		/*// Não dirigido- Simples\Não Regular
+		// Não dirigido- Simples\Não Regular
 		int matriz2[][] = { { 0, 1, 0, 1, 1 }, 
 							{ 1, 0, 1, 0, 1 },
 							{ 0, 1, 0, 1, 1 }, 
 							{ 1, 0, 1, 0, 0 }, 
-							{ 1, 1, 1, 0, 0 } };*/
+							{ 1, 1, 1, 0, 0 } };
+		MatrizAdjacencia m2 = new MatrizAdjacencia(matriz2);
+		System.out.println("\nM2");
+		System.out.println(tipoDoGrafo(m2));
+		System.out.println(arestasDoGrafo(m2));
+		System.out.println(grausDoVertice(m2));
 		
-	/*	// Dirigido\Multigrafo\não regular
+		// Dirigido\Multigrafo\não regular
 		int matriz3[][] = { { 0, 1, 0, 1, 1 },
 							{ 1, 0, 1, 0, 1 },
 							{ 0, 2, 0, 1, 1 }, 
 							{ 1, 1, 1, 0, 0 },
-							{ 1, 1, 1, 0, 0 } };*/
+							{ 1, 1, 1, 0, 0 } };
+		MatrizAdjacencia m3 = new MatrizAdjacencia(matriz3);
+		System.out.println("\nM3");
+		System.out.println(tipoDoGrafo(m3));
+		System.out.println(arestasDoGrafo(m3));
+		System.out.println(grausDoVertice(m3));
 		
 	
 	 	//nul0
-		/*int matriz4[][] = { { 0, 0, 0, 0,},
+		int matriz4[][] = { { 0, 0, 0, 0,},
 							{ 0, 0, 0, 0,},
 							{ 0, 0, 0, 0,},
-							{ 0, 0, 0, 0,}};*/
+							{ 0, 0, 0, 0,}};
+		MatrizAdjacencia m4 = new MatrizAdjacencia(matriz4);
+		System.out.println("\nM4");
+		System.out.println(tipoDoGrafo(m4));
+		System.out.println(arestasDoGrafo(m4));
+		System.out.println(grausDoVertice(m4));
 		
-		/*int matriz5[][] = { { 0, 1, 1},
+		int matriz5[][] = { { 0, 1, 1},
 							{ 1, 0, 1},
 							{ 1, 1, 0}};
+		
+		MatrizAdjacencia m5 = new MatrizAdjacencia(matriz5);
+		System.out.println("\nM5");
+		System.out.println(tipoDoGrafo(m5));
+		System.out.println(arestasDoGrafo(m5));
+		System.out.println(grausDoVertice(m5));
 							
-		*/					
+							
 		// Não dirigido- Simples\Não Regular\bipartido
 		int matriz6[][] = { { 0, 0, 1, 1}, 
 							{ 0, 0, 1, 1},
 							{ 1, 1, 0, 0}, 
 							{ 1, 1, 0, 0} };
+		
 		MatrizAdjacencia m6 = new MatrizAdjacencia(matriz6);
+		System.out.println("\nM6");
 		System.out.println(tipoDoGrafo(m6));
 		System.out.println(arestasDoGrafo(m6));
 		System.out.println(grausDoVertice(m6));
@@ -75,11 +100,23 @@ public class Questao01 {
 							{ 0, 0, 0, 0}, 
 							{ 0, 0, 0, 0}};
 		MatrizAdjacencia m7 = new MatrizAdjacencia(matriz7);
+		System.out.println("\nM7");
 		System.out.println(tipoDoGrafo(m7));
 		System.out.println(arestasDoGrafo(m7));
 		System.out.println(grausDoVertice(m7));
 						
 		
+		// Não dirigido- Simples\Não Regular\completo\bipartido
+		int matriz8[][] = { { 0, 1}, 
+							{ 1, 0},
+							};
+		
+		MatrizAdjacencia m8 = new MatrizAdjacencia(matriz8);
+		System.out.println("\nM8");
+		System.out.println(tipoDoGrafo(m8));
+		System.out.println(arestasDoGrafo(m8));
+		System.out.println(grausDoVertice(m8));
+
 		//try {
 		/*
 		MatrizAdjacencia m0 = new MatrizAdjacencia(matriz0);
@@ -99,13 +136,7 @@ public class Questao01 {
 		MatrizAdjacencia m7 = new MatrizAdjacencia(matriz7);
 		System.out.println(tipoDoGrafo(m7));
 		
-		*/
-		
-		
-		
-		
-		
-		
+		*/	
 	
 		
 		;	
@@ -260,8 +291,8 @@ public class Questao01 {
 
 	public static String arestasDoGrafo(MatrizAdjacencia m) {
 		int[][] matriz = m.getMatriz();
-		String saidaD = " E = {";
-		String saidaND =" E = {";
+		String saidaD = "E = {";
+		String saidaND ="E = {";
 		int totalArestas = 0;
 		boolean simetria = true;
 		for (int i = 0; i < matriz.length; i++) {			
@@ -306,13 +337,19 @@ public class Questao01 {
 	public static String grausDoVertice(MatrizAdjacencia m) {
 		int[][] matriz = m.getMatriz();
 		boolean simetria = true;
-		String saidaD = "(";
-		String saidaEntrada ="(";
-		//int[] grauEntrada = new int[matriz.length];
-		int[] grauSaia = new int[matriz.length];
+		String saidaD = "";
+		String saidaEntrada ="";
+		int[] seqgrauEntrada = new int[matriz.length];
+		int[] seqgrauSaida = new int[matriz.length];
+		int contEntrada = 0;
+		int contSaida = 0;
+		
+		int[] grauEntrada = new int[matriz.length];
 		
 		for (int i = 0; i < matriz.length; i++) {	
 			int somaLinha = 0;
+			
+			//System.out.println(m.getVertices()[i]);
 			
 			for (int j = 0; j < matriz.length; j++) {	
 				
@@ -326,24 +363,80 @@ public class Questao01 {
 				
 				
 				somaLinha += matriz[i][j];
-				grauSaia[i] += matriz[i][j];
-				if(simetria){
+				grauEntrada[j] += matriz[i][j];
+				if(!simetria){
 					if (i == matriz.length - 1){
-						saidaEntrada += "grauEntrada(" +m.getVertices()[j] +")="+grauSaia[i]+" ;";					
-					  //grauEntrada[i] += somaLinha;
+						saidaEntrada += "grauEntrada(" +m.getVertices()[j].getNome() +") = "+grauEntrada[j]+" ;";	
+						
+						//ordena sequencia de grau de entrada
+						
+						if (contEntrada == 0){
+							seqgrauEntrada[contEntrada] = grauEntrada[j];
+							contEntrada ++;
+							
+						}else if(grauEntrada[j] >= seqgrauEntrada[contEntrada-1]){							
+							seqgrauEntrada[contEntrada] = grauEntrada[j];//
+							contEntrada ++;
+							
+						}else{
+							int posicao = contEntrada;
+							while(posicao!=0  && grauEntrada[j] < seqgrauEntrada[posicao-1]){
+								int aux = seqgrauEntrada[posicao -1];
+								seqgrauEntrada[posicao -1] = grauEntrada[j];						
+								seqgrauEntrada[posicao] = aux;
+								posicao --;
+								
+							}
+							contEntrada ++;
+							
+						}
+							
+						
+					  
 					}
 				}
 												
 			}
-			saidaD += "grau(" + m.getVertices()[i] +")="+somaLinha+" ;";	
+			saidaD += "grau(" + m.getVertices()[i].getNome() +") = "+somaLinha+"; ";
+			
+			if (contSaida == 0){
+				seqgrauSaida[contSaida] = somaLinha;
+				contSaida ++;
+				
+			}else if(somaLinha >= seqgrauSaida[contSaida-1]){	
+				seqgrauSaida[contSaida] = somaLinha;//
+				contSaida ++;
+				
+			}else{
+				
+				int posicao = contSaida;
+				while(posicao !=0 && somaLinha < seqgrauSaida[posicao-1]){					
+					int aux =seqgrauSaida[posicao-1];
+					seqgrauSaida[posicao-1] = somaLinha;				
+					seqgrauSaida[posicao] = aux;
+					posicao --;
+				}
+				contSaida ++;
+				
+			}
 			
 		}		
 		String saida = null;
-		if(simetria){
+			if(!simetria){
 			saida = saidaEntrada;
-			saida = saidaD;
+			saida += "\n" +saidaD.replaceAll("grau", "grauSaida")+"\nSequencia de Grau de Entrada = ";
+			String grauSaida= "";
+			for(int i =0; i< matriz.length; i++){
+				saida += seqgrauEntrada[i]+"; ";
+				grauSaida += seqgrauSaida[i]+"; ";
+			}
+			saida += "\nSequencia de Grau de Saida = " +grauSaida;
 		}else{
-			saida = saidaD ;
+			saida = saidaD + "\nSequencia de Grau = " ;
+			for(int i =0; i< matriz.length; i++){
+				saida += seqgrauSaida[i]+"; ";
+				
+			}
 		}
 		
 		

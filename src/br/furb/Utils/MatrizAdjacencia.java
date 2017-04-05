@@ -5,15 +5,28 @@ public class MatrizAdjacencia {
 	private Vertice[] vertices;
 	
 
+	/**
+	 * 
+	 * @param matriz - Matriz NxN
+	 * @param listaVertices - nome dos vetores da matriz
+	 * @throws Exception
+	 */
 	public MatrizAdjacencia(int [][] matriz , Vertice[] listaVertices ) throws Exception{				
 		setMatriz(matriz);
 		setVertices(listaVertices);
 	}
+	
+	/**Gera vertices com nome "v+i"
+	 * 
+	 * @param matriz
+	 */
 	public MatrizAdjacencia(int[][] matriz) /*throws Exception*/{		
 		setMatriz(matriz);
 		vertices =  new Vertice[matriz.length];
 		for(int i= 0; i< matriz.length;i++){
-			vertices[i] = new Vertice("V"+ i);
+			vertices[i] = new Vertice("v"+ (i+1));
+			
+			
 			
 		}
 	}
