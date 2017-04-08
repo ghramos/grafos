@@ -87,6 +87,15 @@ public class Grafo {
 
 	}
 
+	public Vertice getVertice(String nome) {
+		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {
+			if (entry.getValue().getNome().equals(nome))
+				return entry.getValue();
+		}
+		return null;
+
+	}
+
 	public String getSequenciaDeGraus() {
 		ArrayList<Integer> a = new ArrayList<>();
 		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {
@@ -109,10 +118,11 @@ public class Grafo {
 		tempo += 1;
 		U.setDistancia(tempo);
 		for (Vertice v : U.getVerticesAdjacentes()) {
-			if (v.getCor() == Color.BRANCO)
+			if (v.getCor() == Color.BRANCO) {
 				DFSVISIT(v);
-			else if (v.getCor() == Color.CINZA)
+			} else if (v.getCor() == Color.CINZA) {
 				possuiCiclo = true;
+			}
 		}
 		U.setCor(Color.PRETO);
 		tempo += 1;

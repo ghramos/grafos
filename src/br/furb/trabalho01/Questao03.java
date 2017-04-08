@@ -32,7 +32,7 @@ public class Questao03 {
 
 			for (int i = 0; i < M; i++) {// Faz a ligacao dos vertices
 				str = input.readLine().split(" ");
-
+				
 				Vertice A = g.getVertice(Integer.parseInt(str[0]));
 				Vertice B = g.getVertice(Integer.parseInt(str[1]));
 
@@ -45,6 +45,7 @@ public class Questao03 {
 				System.out.println("NAO");
 			g = new Grafo();
 		}
+		return;
 	}
 
 }
