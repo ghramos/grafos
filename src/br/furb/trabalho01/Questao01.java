@@ -7,6 +7,7 @@ package br.furb.trabalho01;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.sun.media.sound.InvalidFormatException;
@@ -30,7 +31,7 @@ public class Questao01 {
 		do {
 			Scanner entrada = new Scanner(System.in);
 			System.out.println(
-					"Informe o nome de cada vertices da matriz de adjacência separadas por \";\"\nEx: v1;..;vn (Vertices com nomes iguais serão ignoradas)");
+					"Informe o nome de cada vertices da matriz de adjacência separadas por \";\"\nEx: v1;..;vn (Vertices com nomes iguais serão ignoradas)" );
 			String[] v = (entrada.nextLine() + ";").split(";");
 			//System.out.println(v.length);
 			MatrizAdjacencia ma = null;
@@ -48,7 +49,7 @@ public class Questao01 {
 			int leitura = 0;
 			do {
 				System.out.println(
-						"\nEscolha a forma de Entrada: \n1- Informa a string de uma matriz EX:({{N11,...,N1n},{Nn1,...,Nnn}}) \n2- Informar os elementos da matriz separadamente.");
+						"\nEscolha a forma de Entrada: \n1- Informar a string de uma matriz EX:({{N11,...,N1n},{Nnn,...,Nnn}{N,n1,...,Nnn}}) *Todos os elementos da string devem estar em uma linha* \n2- Informar os elementos da matriz separadamente.");
 				Scanner inteiro = new Scanner(System.in);
 				try {
 					leitura = inteiro.nextInt();
@@ -66,7 +67,14 @@ public class Questao01 {
 				case 1:
 					System.out.println("Matriz:");
 					Scanner s = new Scanner(System.in);
-					String matrizString = s.nextLine();
+					String matrizString = "";
+									
+					//while(s.hasNext()){
+					 matrizString += s.nextLine();	
+					// System.out.println("Scan"+matrizString);
+					//}
+					//s.close();
+					
 					System.out.println("Scan"+matrizString);
 					boolean matrizValida = false;
 					
