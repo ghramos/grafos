@@ -3,6 +3,7 @@ package br.furb.Utils;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sun.media.sound.InvalidFormatException;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class MatrizAdjacencia {
@@ -31,8 +32,7 @@ public class MatrizAdjacencia {
 		vertices =  new Vertice[matriz.length];
 		for(int i= 0; i< matriz.length;i++){
 			vertices[i] = new Vertice("v"+ (i+1));
-			
-			
+						
 			
 		}
 	}
@@ -40,16 +40,17 @@ public class MatrizAdjacencia {
 	/**Gera vertices com nome baseado na String[] 
 	 * 
 	 * @param matriz
+	 * @throws InvalidFormatException 
 	 * @throws Exception 
 	 */
-	public MatrizAdjacencia(int[][] matriz, String [] nomeVertices) throws Exception {		
-		setMatriz(matriz);
-		
+	public MatrizAdjacencia(int[][] matriz, String [] nomeVertices) throws InvalidFormatException  {		
+			
 		vertices =  new Vertice[matriz.length];
 		for(int i= 0; i< matriz.length;i++){
 			vertices[i] = new Vertice(nomeVertices[i]);
 						
 		}
+		setMatriz(matriz);	
 	}
 	private static String[] validaNomeVertices (String[] v){
 		Set<String> nomeVetores = new HashSet<>();
@@ -68,13 +69,15 @@ public class MatrizAdjacencia {
 		return s_nomeVetores;
 		
 	}
-	public static MatrizAdjacencia criaMatriz  (String[] v) throws Exception{
+	public static MatrizAdjacencia criaMatriz  (String[] v) throws InvalidFormatException {
 		String[] nomeVertices = MatrizAdjacencia.validaNomeVertices(v);
+		//System.out.println(nomeVertices.length);
 		int[][] matriz = new int[nomeVertices.length][nomeVertices.length];
 
 		return 	new MatrizAdjacencia(matriz, nomeVertices);
 		
 	}
+
 	
 	
 	public String listaNomeVertices() {
@@ -88,10 +91,15 @@ public class MatrizAdjacencia {
 	public int[][] getMatriz() {
 		return matriz;
 	}
-	public void setMatriz(int[][] matriz) throws Exception {
+	public void setMatriz(int[][] matriz) throws InvalidFormatException {
 		if(matriz.length != matriz[0].length){
-			throw new Exception("Matriz de Adjacência deve ser NxN");
+			throw new InvalidFormatException("Matriz de Adjacência deve ser NxN!");
 		}else{
+		if(vertices != null){	
+			if(matriz.length != vertices.length){
+				throw new InvalidFormatException("Matriz deve conter linha correspondente a quantidade de vertices!");
+			}
+		}
 		this.matriz = matriz;
 		}
 		
@@ -272,12 +280,16 @@ public class MatrizAdjacencia {
 					int cont = 0;
 					// Trata Arestas paralelas
 					//if(matriz[i][j] >1){
-					while(matriz[i][j] != cont){						
-						saidaND += "("+i+","+j+")";					
+					while(matriz[i][j] != cont){	
+						if(simetria){
+							if(j>=1 && i<=j){
+							saidaND += "("+i+","+j+")";
+							saidaND +=",";
+							}
+						}
 						saidaD += "("+i+","+j+")";
 								
-						saidaD += ",";
-						saidaND +=",";
+						saidaD += ",";						
 						totalArestas ++;
 						cont++;
 					}				
@@ -403,6 +415,41 @@ public class MatrizAdjacencia {
 		
 		return saida;
 
+	}
+	
+	
+	/**Informe uma string contendo o equivalente a um vetor NXN sendo N a quantidadade de vertice informadas
+	 * 
+	 * @param s
+	 * @return
+	 * @throws NumberFormatException
+	 * @throws InvalidFormatException
+	 */
+	public boolean leMatrizString(String s) throws NumberFormatException, InvalidFormatException{
+	boolean saida= false;
+	
+	s= s.replace("{", "").replace(" ","").replace("\t", "").replace("\n", "").replace(";","");
+	String linha[] = s.split("},",vertices.length);
+	//System.out.println("Lendo:" +s);
+
+	int matriz[][] = new int[linha.length][linha.length];
+	for(int i = 0;  i < linha.length; i++){
+		//System.out.println(linha[i]);
+		for(int j = 0; j < linha.length ; j++){
+			
+			String[] coluna = linha[i].replaceAll("}", "").replace(" ","").split(",",linha.length);
+			//System.out.println(i+"x"+j+":"+coluna.length+"x"+linha.length);	
+			//System.out.println(coluna[j]);	
+			
+			if (!coluna[j].trim().equals("")){	
+			matriz[i][j] = Integer.parseInt(coluna[j].replace(";", "").replace("}", "").replace(",", ""));
+			}
+		}
+	}
+	
+	setMatriz(matriz);
+	return saida;
+		
 	}
 	
 }
