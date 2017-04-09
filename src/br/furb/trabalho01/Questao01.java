@@ -24,9 +24,7 @@ public class Questao01 {
 			e1.printStackTrace();
 		}*/
 
-		// int matriz7[][] ="{ { 0, 3, 1, 1 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, {
-		// 0, 0, 0, 0 } }");
-
+		
 		int opcao = 0;
 		do {
 			Scanner entrada = new Scanner(System.in);
@@ -49,7 +47,7 @@ public class Questao01 {
 			int leitura = 0;
 			do {
 				System.out.println(
-						"\nEscolha a forma de Entrada: \n1- Informar a string de uma matriz EX:({{N11,...,N1n},{Nnn,...,Nnn}{N,n1,...,Nnn}}) *Todos os elementos da string devem estar em uma linha* \n2- Informar os elementos da matriz separadamente.");
+						"\nEscolha a forma de Entrada: \n1- Informar a string de uma matriz EX:({{N11,...,N1n},{Nnn,...,Nnn}{N,n1,...,Nnn}})  \n2- Informar os elementos da matriz separadamente.");
 				Scanner inteiro = new Scanner(System.in);
 				try {
 					leitura = inteiro.nextInt();
@@ -65,27 +63,32 @@ public class Questao01 {
 				// char[ma.listaNomeVertices().length()/2]).replace("", "_"));
 				switch (leitura) {
 				case 1:
+					System.out.println("Apóz informar a Matriz perte duas vezes o \"Enter\" para confirmar.");
 					System.out.println("Matriz:");
 					Scanner s = new Scanner(System.in);
 					String matrizString = "";
-									
-					//while(s.hasNext()){
-					 matrizString += s.nextLine();	
+							
+					
+					String e = "";
+					do {					
+					e = s.nextLine();
+					 matrizString += e;	
+					
 					// System.out.println("Scan"+matrizString);
-					//}
+					}while(!e.trim().equals(""));
 					//s.close();
 					
-					System.out.println("Scan"+matrizString);
-					boolean matrizValida = false;
+					//System.out.println("\nScan"+matrizString);
+					//boolean matrizValida = false;
 					
 						try{
 						ma.leMatrizString(matrizString);						
 						}catch (InvalidFormatException ife) {
-							System.out.print(ife.getMessage());
+							System.err.print(ife.getMessage());
 							leitura = -1;
 							
 						}catch (NumberFormatException nfe) {
-							System.out.print(nfe.getMessage());
+							System.err.print(nfe.getMessage());
 							leitura = -1;
 						}
 					
@@ -108,10 +111,10 @@ public class Questao01 {
 									}
 									ma.getMatriz()[i][j] = a;
 									isInt = true;
-								} catch (InputMismatchException e) {
+								} catch (InputMismatchException e1) {
 									isInt = false;
 									System.out.print("Informe um inteiro positivo!");
-								} catch (IllegalArgumentException e) {
+								} catch (IllegalArgumentException e1) {
 									isInt = false;
 									System.out.print("Informe um inteiro positivo!");
 								}
@@ -233,7 +236,10 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.grausDoVertice(m6));
 
 		// Dirigido- Multigrado\Não Regular\bipartido
-		int matriz7[][] = { { 0, 3, 1, 1 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+		int matriz7[][] = { { 0, 3, 1, 1 }, 
+							{ 0, 0, 0, 0 }, 
+							{ 0, 0, 0, 0 }, 
+							{ 0, 0, 0, 0 } };
 		MatrizAdjacencia m7 = new MatrizAdjacencia(matriz7);
 		System.out.println("\nM7");
 		System.out.println(MatrizAdjacencia.tipoDoGrafo(m7));
@@ -242,7 +248,7 @@ public class Questao01 {
 
 		// Não dirigido- Simples\Não Regular\completo\bipartido
 		int matriz8[][] = { { 0, 1 },
-							{ 1, 0 }, };
+							{ 1, 0 } };
 
 		MatrizAdjacencia m8 = new MatrizAdjacencia(matriz8);
 		System.out.println("\nM8");

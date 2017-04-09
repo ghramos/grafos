@@ -429,20 +429,27 @@ public class MatrizAdjacencia {
 	boolean saida= false;
 	
 	s= s.replace("{", "").replace(" ","").replace("\t", "").replace("\n", "").replace(";","");
-	String linha[] = s.split("},",vertices.length);
+	String linha[] = s.split("},");
+	
 	//System.out.println("Lendo:" +s);
+	if(linha.length != vertices.length){
+		throw new InvalidFormatException("Quantidades de separadores de linha[,], diferente do numero de vértices!");
+	}
 
 	int matriz[][] = new int[linha.length][linha.length];
 	for(int i = 0;  i < linha.length; i++){
 		//System.out.println(linha[i]);
 		for(int j = 0; j < linha.length ; j++){
 			
-			String[] coluna = linha[i].replaceAll("}", "").replace(" ","").split(",",linha.length);
+			String[] coluna = linha[i].replaceAll("}", "").replace(" ","").split(",");
 			//System.out.println(i+"x"+j+":"+coluna.length+"x"+linha.length);	
 			//System.out.println(coluna[j]);	
-			
-			if (!coluna[j].trim().equals("")){	
-			matriz[i][j] = Integer.parseInt(coluna[j].replace(";", "").replace("}", "").replace(",", ""));
+			if(coluna.length != vertices.length){
+				throw new InvalidFormatException("Quantidades de separadores de Coluna[,], diferente do numero de vértices!");
+			}else{
+				if (!coluna[j].trim().equals("")){	
+				matriz[i][j] = Integer.parseInt(coluna[j].replace(";", "").replace("}", "").replace(",", ""));
+				}
 			}
 		}
 	}
