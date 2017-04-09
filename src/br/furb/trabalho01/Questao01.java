@@ -9,24 +9,35 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.sun.media.sound.InvalidFormatException;
+
 import br.furb.Utils.MatrizAdjacencia;
 
 public class Questao01 {
 	public static void main(String[] args) throws IOException {
 
-		// testePadrao();
+		/*try {
+			//testePadrao();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
+
+		// int matriz7[][] ="{ { 0, 3, 1, 1 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, {
+		// 0, 0, 0, 0 } }");
 
 		int opcao = 0;
 		do {
 			Scanner entrada = new Scanner(System.in);
 			System.out.println(
-					"Informe o nome de cada vertices da matriz de adjacência separadas por \";\" (Vertices com nomes igauais serão ignorados)");
+					"Informe o nome de cada vertices da matriz de adjacência separadas por \";\"\nEx: v1;..;vn (Vertices com nomes iguais serão ignoradas)");
 			String[] v = (entrada.nextLine() + ";").split(";");
-
+			//System.out.println(v.length);
 			MatrizAdjacencia ma = null;
 			try {
 				ma = MatrizAdjacencia.criaMatriz(v);
-			} catch (Exception e) {
+				
+			} catch (InvalidFormatException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
 			}
@@ -34,41 +45,82 @@ public class Questao01 {
 			int i = 0;
 			int j = 0;
 
-			System.out.println("Informe o valores da matriz:");
-			// System.out.println(" " + ma.listaNomeVertices());
-
-			// System.out.println("____" + new String(new
-			// char[ma.listaNomeVertices().length()/2]).replace("", "_"));
-
-			for (i = 0; i < ma.getVertices().length; i++) {
-				for (j = 0; j < ma.getVertices().length; j++) {
-					System.out.print("Valor de [" + ma.getVertices()[i].getNome() + "]x["
-							+ ma.getVertices()[j].getNome() + "] :");
-
-					boolean isInt = false;
-					while (!isInt) {
-						Scanner inteiro = new Scanner(System.in);
-						try {
-							int a = inteiro.nextInt();
-							if (a < 0) {
-								throw new IllegalArgumentException();
-							}
-							ma.getMatriz()[i][j] = a;
-							isInt = true;
-						} catch (InputMismatchException e) {
-							isInt = false;
-							System.out.print("Informe um inteiro positivo!");
-						} catch (IllegalArgumentException e) {
-							isInt = false;
-							System.out.print("Informe um inteiro positivo!");
-						}
-						// }
-
-					}
+			int leitura = 0;
+			do {
+				System.out.println(
+						"\nEscolha a forma de Entrada: \n1- Informa a string de uma matriz EX:({{N11,...,N1n},{Nn1,...,Nnn}}) \n2- Informar os elementos da matriz separadamente.");
+				Scanner inteiro = new Scanner(System.in);
+				try {
+					leitura = inteiro.nextInt();
+				} catch (InputMismatchException ime) {
+					leitura = -1;
+					System.out.println(ime.getMessage());
 
 				}
 
-			}
+				// System.out.println(" " + ma.listaNomeVertices());
+
+				// System.out.println("____" + new String(new
+				// char[ma.listaNomeVertices().length()/2]).replace("", "_"));
+				switch (leitura) {
+				case 1:
+					System.out.println("Matriz:");
+					Scanner s = new Scanner(System.in);
+					String matrizString = s.nextLine();
+					System.out.println("Scan"+matrizString);
+					boolean matrizValida = false;
+					
+						try{
+						ma.leMatrizString(matrizString);						
+						}catch (InvalidFormatException ife) {
+							System.out.print(ife.getMessage());
+							leitura = -1;
+							
+						}catch (NumberFormatException nfe) {
+							System.out.print(nfe.getMessage());
+							leitura = -1;
+						}
+					
+					break;
+
+				case 2:
+
+					for (i = 0; i < ma.getVertices().length; i++) {
+						for (j = 0; j < ma.getVertices().length; j++) {
+							System.out.print("Valor de [" + ma.getVertices()[i].getNome() + "]x["
+									+ ma.getVertices()[j].getNome() + "] :");
+
+							boolean isInt = false;
+							while (!isInt) {
+								Scanner inteiro1 = new Scanner(System.in);
+								try {
+									int a = inteiro1.nextInt();
+									if (a < 0) {
+										throw new IllegalArgumentException();
+									}
+									ma.getMatriz()[i][j] = a;
+									isInt = true;
+								} catch (InputMismatchException e) {
+									isInt = false;
+									System.out.print("Informe um inteiro positivo!");
+								} catch (IllegalArgumentException e) {
+									isInt = false;
+									System.out.print("Informe um inteiro positivo!");
+								}
+								// }
+
+							}
+
+						}
+
+					}
+
+				default:
+					leitura = -1;
+					break;
+				}
+			} while (leitura != 1 && leitura != 2);
+			
 			do {
 				System.out.println(
 						"\nEcolha a Próxima ação:\n 1- Tipo do Grafo.\n 2- Arestas do Grafo \n 3- Graus do Vertice \n 4 -Novo Grafo\n 0- Sair");
@@ -93,7 +145,7 @@ public class Questao01 {
 					break;
 				case 4:
 					System.out.println("\n");
-					break;	
+					break;
 				case 0:
 
 					break;
@@ -181,7 +233,8 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.grausDoVertice(m7));
 
 		// Não dirigido- Simples\Não Regular\completo\bipartido
-		int matriz8[][] = { { 0, 1 }, { 1, 0 }, };
+		int matriz8[][] = { { 0, 1 },
+							{ 1, 0 }, };
 
 		MatrizAdjacencia m8 = new MatrizAdjacencia(matriz8);
 		System.out.println("\nM8");
