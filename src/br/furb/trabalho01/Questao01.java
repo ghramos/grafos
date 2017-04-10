@@ -17,13 +17,13 @@ import br.furb.Utils.MatrizAdjacencia;
 public class Questao01 {
 	public static void main(String[] args) throws IOException {
 
-		/*try {
-			//testePadrao();
+	/*	try {
+			testePadrao();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}*/
-
+		}
+*/
 		
 		int opcao = 0;
 		do {

@@ -283,11 +283,11 @@ public class MatrizAdjacencia {
 					while(matriz[i][j] != cont){	
 						if(simetria){
 							if(j>=1 && i<=j){
-							saidaND += "("+i+","+j+")";
+							saidaND += "("+m.getVertices()[i].getNome()+","+m.getVertices()[j].getNome()+")";
 							saidaND +=",";
 							}
 						}
-						saidaD += "("+i+","+j+")";
+						saidaD += "("+m.getVertices()[i].getNome()+","+m.getVertices()[j].getNome()+")";
 								
 						saidaD += ",";						
 						totalArestas ++;
