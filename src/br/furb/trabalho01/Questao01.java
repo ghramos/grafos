@@ -2,7 +2,7 @@ package br.furb.trabalho01;
 
 /*Equipe:
  * Guilherme H R
- *  Francisca E X
+ * Francisca E X
  */
 
 import java.io.IOException;
@@ -17,25 +17,22 @@ import br.furb.Utils.MatrizAdjacencia;
 public class Questao01 {
 	public static void main(String[] args) throws IOException {
 
-	/*	try {
-			testePadrao();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-*/
-		
+		/*
+		 * try { testePadrao(); } catch (Exception e1) { // TODO Auto-generated
+		 * catch block e1.printStackTrace(); }
+		 */
+
 		int opcao = 0;
 		do {
 			Scanner entrada = new Scanner(System.in);
 			System.out.println(
-					"Informe o nome de cada vertices da matriz de adjac�ncia separadas por \";\"\nEx: v1;..;vn (Vertices com nomes iguais ser�o ignoradas)" );
+					"Informe o nome de cada vertices da matriz de adjac�ncia separadas por \";\"\nEx: v1;..;vn (Vertices com nomes iguais ser�o ignoradas)");
 			String[] v = (entrada.nextLine() + ";").split(";");
-			//System.out.println(v.length);
+			// System.out.println(v.length);
 			MatrizAdjacencia ma = null;
 			try {
 				ma = MatrizAdjacencia.criaMatriz(v);
-				
+
 			} catch (InvalidFormatException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
@@ -67,31 +64,30 @@ public class Questao01 {
 					System.out.println("Matriz:");
 					Scanner s = new Scanner(System.in);
 					String matrizString = "";
-							
-					
+
 					String e = "";
-					do {					
-					e = s.nextLine();
-					 matrizString += e;	
-					
-					// System.out.println("Scan"+matrizString);
-					}while(!e.trim().equals(""));
-					//s.close();
-					
-					//System.out.println("\nScan"+matrizString);
-					//boolean matrizValida = false;
-					
-						try{
-						ma.leMatrizString(matrizString);						
-						}catch (InvalidFormatException ife) {
-							System.err.print(ife.getMessage());
-							leitura = -1;
-							
-						}catch (NumberFormatException nfe) {
-							System.err.print(nfe.getMessage());
-							leitura = -1;
-						}
-					
+					do {
+						e = s.nextLine();
+						matrizString += e;
+
+						// System.out.println("Scan"+matrizString);
+					} while (!e.trim().equals(""));
+					// s.close();
+
+					// System.out.println("\nScan"+matrizString);
+					// boolean matrizValida = false;
+
+					try {
+						ma.leMatrizString(matrizString);
+					} catch (InvalidFormatException ife) {
+						System.err.print(ife.getMessage());
+						leitura = -1;
+
+					} catch (NumberFormatException nfe) {
+						System.err.print(nfe.getMessage());
+						leitura = -1;
+					}
+
 					break;
 
 				case 2:
@@ -131,7 +127,7 @@ public class Questao01 {
 					break;
 				}
 			} while (leitura != 1 && leitura != 2);
-			
+
 			do {
 				System.out.println(
 						"\nEcolha a Pr�xima a��o:\n 1- Tipo do Grafo.\n 2- Arestas do Grafo \n 3- Graus do Vertice \n 4 -Novo Grafo\n 0- Sair");
@@ -236,10 +232,7 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.grausDoVertice(m6));
 
 		// Dirigido- Multigrado\N�o Regular\bipartido
-		int matriz7[][] = { { 0, 3, 1, 1 }, 
-							{ 0, 0, 0, 0 }, 
-							{ 0, 0, 0, 0 }, 
-							{ 0, 0, 0, 0 } };
+		int matriz7[][] = { { 0, 3, 1, 1 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 		MatrizAdjacencia m7 = new MatrizAdjacencia(matriz7);
 		System.out.println("\nM7");
 		System.out.println(MatrizAdjacencia.tipoDoGrafo(m7));
@@ -247,8 +240,7 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.grausDoVertice(m7));
 
 		// N�o dirigido- Simples\N�o Regular\completo\bipartido
-		int matriz8[][] = { { 0, 1 },
-							{ 1, 0 } };
+		int matriz8[][] = { { 0, 1 }, { 1, 0 } };
 
 		MatrizAdjacencia m8 = new MatrizAdjacencia(matriz8);
 		System.out.println("\nM8");

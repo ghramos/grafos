@@ -9,7 +9,7 @@ import br.furb.Utils.Vertice;
 
 /*Equipe:
  * Guilherme H R
- *  Francisca E X
+ * Francisca E X
  */
 
 public class Questao03 {
@@ -32,7 +32,7 @@ public class Questao03 {
 
 			for (int i = 0; i < M; i++) {// Faz a ligacao dos vertices
 				str = input.readLine().split(" ");
-				
+
 				Vertice A = g.getVertice(Integer.parseInt(str[0]));
 				Vertice B = g.getVertice(Integer.parseInt(str[1]));
 
