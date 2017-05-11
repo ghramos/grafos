@@ -29,7 +29,7 @@ public class Questao01 {
 		do {
 			Scanner entrada = new Scanner(System.in);
 			System.out.println(
-					"Informe o nome de cada vertices da matriz de adjacência separadas por \";\"\nEx: v1;..;vn (Vertices com nomes iguais serão ignoradas)" );
+					"Informe o nome de cada vertices da matriz de adjacï¿½ncia separadas por \";\"\nEx: v1;..;vn (Vertices com nomes iguais serï¿½o ignoradas)" );
 			String[] v = (entrada.nextLine() + ";").split(";");
 			//System.out.println(v.length);
 			MatrizAdjacencia ma = null;
@@ -63,7 +63,7 @@ public class Questao01 {
 				// char[ma.listaNomeVertices().length()/2]).replace("", "_"));
 				switch (leitura) {
 				case 1:
-					System.out.println("Apóz informar a Matriz perte duas vezes o \"Enter\" para confirmar.");
+					System.out.println("Apï¿½z informar a Matriz perte duas vezes o \"Enter\" para confirmar.");
 					System.out.println("Matriz:");
 					Scanner s = new Scanner(System.in);
 					String matrizString = "";
@@ -134,7 +134,7 @@ public class Questao01 {
 			
 			do {
 				System.out.println(
-						"\nEcolha a Próxima ação:\n 1- Tipo do Grafo.\n 2- Arestas do Grafo \n 3- Graus do Vertice \n 4 -Novo Grafo\n 0- Sair");
+						"\nEcolha a Prï¿½xima aï¿½ï¿½o:\n 1- Tipo do Grafo.\n 2- Arestas do Grafo \n 3- Graus do Vertice \n 4 -Novo Grafo\n 0- Sair");
 
 				Scanner inteiro = new Scanner(System.in);
 				try {
@@ -162,7 +162,7 @@ public class Questao01 {
 					break;
 
 				default:
-					System.out.print("Opção inválida!");
+					System.out.print("Opï¿½ï¿½o invï¿½lida!");
 
 					break;
 				}
@@ -174,7 +174,7 @@ public class Questao01 {
 	}
 
 	public static void testePadrao() throws Exception {
-		// Não dirigido/Simples/regular completo
+		// Nï¿½o dirigido/Simples/regular completo
 		int matriz0[][] = { { 0, 1, 1, 1 }, { 1, 0, 1, 1 }, { 1, 1, 0, 1 }, { 1, 1, 1, 0 } };
 		MatrizAdjacencia m0 = new MatrizAdjacencia(matriz0);
 		System.out.println("\nM0");
@@ -192,7 +192,7 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.arestasDoGrafo(m1));
 		System.out.println(MatrizAdjacencia.grausDoVertice(m1));
 
-		// Não dirigido- Simples\Não Regular
+		// Nï¿½o dirigido- Simples\Nï¿½o Regular
 		int matriz2[][] = { { 0, 1, 0, 1, 1 }, { 1, 0, 1, 0, 1 }, { 0, 1, 0, 1, 1 }, { 1, 0, 1, 0, 0 },
 				{ 1, 1, 1, 0, 0 } };
 		MatrizAdjacencia m2 = new MatrizAdjacencia(matriz2);
@@ -201,7 +201,7 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.arestasDoGrafo(m2));
 		System.out.println(MatrizAdjacencia.grausDoVertice(m2));
 
-		// Dirigido\Multigrafo\não regular
+		// Dirigido\Multigrafo\nï¿½o regular
 		int matriz3[][] = { { 0, 1, 0, 1, 1 }, { 1, 0, 1, 0, 1 }, { 0, 2, 0, 1, 1 }, { 1, 1, 1, 0, 0 },
 				{ 1, 1, 1, 0, 0 } };
 		MatrizAdjacencia m3 = new MatrizAdjacencia(matriz3);
@@ -226,7 +226,7 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.arestasDoGrafo(m5));
 		System.out.println(MatrizAdjacencia.grausDoVertice(m5));
 
-		// Não dirigido- Simples\Não Regular\bipartido
+		// Nï¿½o dirigido- Simples\Nï¿½o Regular\bipartido
 		int matriz6[][] = { { 0, 0, 1, 1 }, { 0, 0, 1, 1 }, { 1, 1, 0, 0 }, { 1, 1, 0, 0 } };
 
 		MatrizAdjacencia m6 = new MatrizAdjacencia(matriz6);
@@ -235,7 +235,7 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.arestasDoGrafo(m6));
 		System.out.println(MatrizAdjacencia.grausDoVertice(m6));
 
-		// Dirigido- Multigrado\Não Regular\bipartido
+		// Dirigido- Multigrado\Nï¿½o Regular\bipartido
 		int matriz7[][] = { { 0, 3, 1, 1 }, 
 							{ 0, 0, 0, 0 }, 
 							{ 0, 0, 0, 0 }, 
@@ -246,7 +246,7 @@ public class Questao01 {
 		System.out.println(MatrizAdjacencia.arestasDoGrafo(m7));
 		System.out.println(MatrizAdjacencia.grausDoVertice(m7));
 
-		// Não dirigido- Simples\Não Regular\completo\bipartido
+		// Nï¿½o dirigido- Simples\Nï¿½o Regular\completo\bipartido
 		int matriz8[][] = { { 0, 1 },
 							{ 1, 0 } };
 
