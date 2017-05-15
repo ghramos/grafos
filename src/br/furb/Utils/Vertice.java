@@ -5,22 +5,24 @@ import java.util.ArrayList;
 public class Vertice {
 
 	private String nome;
+	private int x;
+	private int y;
 	private Color cor;
 	private int distancia;
 	private int fRetorno;
 	private Vertice pai;
 	private ArrayList<Vertice> verticesAdjacentes;
 
-	public Vertice(String nome) {
+	public Vertice(String nome, int x, int y) {
 		setNome(nome);
+		setX(x);
+		setY(y);
 		setCor(Color.BRANCO);
 		setDistancia(0);
 		setfRetorno(0);
 		setPai(null);
 		this.verticesAdjacentes = new ArrayList<Vertice>();
 	}
-	
-	
 
 	public String getNome() {
 		return nome;
@@ -32,6 +34,22 @@ public class Vertice {
 
 	public int getDistancia() {
 		return distancia;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	public int getfRetorno() {
@@ -76,17 +94,21 @@ public class Vertice {
 		return getVerticesAdjacentes().size();
 	}
 
+	public void removeVerticeAdjacente(Vertice v) {
+		verticesAdjacentes.remove(v);
+	}
+
 	public void AddVerticeAdjacente(Vertice v) {
 		verticesAdjacentes.add(v);
 	}
 
 	@Override
 	public String toString() {
-		String str = "";
-		for (Vertice v : verticesAdjacentes) {
-			str += v.getNome() + " ";
-		}
-		return str;
+		// String str = "";
+		// for (Vertice v : verticesAdjacentes) {
+		// str += v.getNome() + " ";
+		// }
+		return getNome();
 	}
 
 }
