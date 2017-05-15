@@ -2,7 +2,6 @@ package br.furb.trabalho02;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -20,7 +19,7 @@ public class Principal {
 	private static File f;
 
 	public static void main(String[] args) throws IOException {
-		f = new File("XXXXXXXXXXXX/src/br/furb/trabalho02/teste.txt");
+		f = new File("XXXXXXXXXXXXXXX/src/br/furb/trabalho02/teste.txt");
 		b = new BufferedReader(new FileReader(f));
 		Grafo g = new Grafo();
 
@@ -68,9 +67,12 @@ public class Principal {
 			B.AddVerticeAdjacente(A);
 		}
 		g.setDebug(true);
-		// System.out.println(g.toString());
+
 		g.normalizarGrafo();
-		// System.out.println(g.toString());
+
+		g.dijkstra(g.getVertice(1), g.getVertice(16));
+
+		System.out.println(g.matrizDijkstra());
 	}
 
 }

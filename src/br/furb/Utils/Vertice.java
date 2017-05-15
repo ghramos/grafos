@@ -8,7 +8,7 @@ public class Vertice {
 	private int x;
 	private int y;
 	private Color cor;
-	private int distancia;
+	private double distancia;
 	private int fRetorno;
 	private Vertice pai;
 	private ArrayList<Vertice> verticesAdjacentes;
@@ -32,7 +32,7 @@ public class Vertice {
 		return cor;
 	}
 
-	public int getDistancia() {
+	public double getDistancia() {
 		return distancia;
 	}
 
@@ -72,7 +72,7 @@ public class Vertice {
 		this.cor = cor;
 	}
 
-	public void setDistancia(int distancia) {
+	public void setDistancia(double distancia) {
 		this.distancia = distancia;
 	}
 

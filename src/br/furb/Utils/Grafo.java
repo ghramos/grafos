@@ -1,6 +1,8 @@
 package br.furb.Utils;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +19,9 @@ public class Grafo {
 	private boolean possuiCiclo;
 	private boolean digrafo;
 	private boolean debug;
+	private double total = 0.0;
+
+	private ArrayList<Vertice> Q = new ArrayList<>();
 
 	public Grafo() {
 		possuiCiclo = false;
@@ -253,6 +258,110 @@ public class Grafo {
 		}
 
 		logging("normalizarGrafo", "Fim normalizador...");
+	}
+
+	private void initializeSingleSource(Vertice s) {
+		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {
+			entry.getValue().setDistancia(99);
+			entry.getValue().setPai(null);
+		}
+		s.setDistancia(0);
+	}
+
+	private ArrayList<Vertice> addGrafoNaLista() {
+		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {
+
+			if (entry.getValue().getVerticesAdjacentes().size() != 0)
+				Q.add(entry.getValue());
+		}
+
+		return Q;
+	}
+
+	private Vertice extractMin() {
+		Vertice u = null;
+		for (Vertice vertice : Q) {
+			if (u == null) {
+				u = vertice;
+			} else {
+				if (vertice.getDistancia() < u.getDistancia()) {
+					u = vertice;
+				}
+			}
+		}
+		Q.remove(u);
+
+		return u;
+	}
+
+	private void relax(Vertice u, Vertice v) {
+		NumberFormat nf = new DecimalFormat("#0.00");
+		double w = calculaDistancia(u, v);
+
+		if (v.getDistancia() > (u.getDistancia() + w)) {
+			String dV = ((v.getDistancia() == Double.MAX_VALUE) ? "  ∞ " : nf.format(v.getDistancia()));
+			logging("dijkstra-relax", "[" + v.getNome() + "] (" + dV + " > " + nf.format(u.getDistancia()) + " + "
+					+ nf.format(w) + ") OK");
+
+			v.setDistancia(u.getDistancia() + w);
+			v.setPai(u);
+		} else {
+			String dV = ((v.getDistancia() == Double.MAX_VALUE) ? "  ∞ " : nf.format(v.getDistancia()));
+			logging("dijkstra-relax",
+					"[" + v.getNome() + "] (" + dV + " > " + nf.format(u.getDistancia()) + " + " + nf.format(w) + ")");
+		}
+
+	}
+
+	private void dijkstra(Vertice origem) {
+		Vertice u = null;
+
+		initializeSingleSource(origem);
+		Q = addGrafoNaLista();
+		while (!Q.isEmpty()) {
+			u = extractMin();
+			logging("dijkstra", "[" + u.getNome() + "]");
+			for (Vertice v : u.getVerticesAdjacentes()) {
+				relax(u, v);
+			}
+		}
+	}
+
+	public void dijkstra(Vertice origem, Vertice destino) {
+		dijkstra(origem);
+		String str = "";
+		str += String.format("%5s %5s %10s %25s", "X", "Y", "Vértice", "Distância");
+		str += "\n";
+		str += imprimeDijkstra(destino);
+		str += String.format("%5s %5s %10s %25s", "", "", "Total", total);
+		System.out.println(str);
+
+	}
+
+	public String imprimeDijkstra(Vertice v) {
+		String str = "";
+		if (v.getPai() != null)
+			str += imprimeDijkstra(v.getPai());
+
+		str += String.format("%5s %5s %10s %25s", v.getX(), v.getY(), "V" + v.getNome(), v.getDistancia());
+		str += "\n";
+		total += v.getDistancia();
+		return str;
+	}
+
+	public String matrizDijkstra() {
+		NumberFormat nf = new DecimalFormat("#0.00");
+		String str = " ";
+		String str1 = "d";
+		String str2 = "π";
+
+		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {
+			str += String.format("%7s", entry.getValue().getNome());
+			str1 += String.format("%7s", nf.format(entry.getValue().getDistancia()));
+			str2 += String.format("%7s", entry.getValue().getPai());
+		}
+
+		return str + "\n" + str1 + "\n" + str2;
 	}
 
 	public void logging(String metodo, String log) {
