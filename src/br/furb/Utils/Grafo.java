@@ -19,7 +19,6 @@ public class Grafo {
 	private boolean possuiCiclo;
 	private boolean digrafo;
 	private boolean debug;
-	private double total = 0.0;
 
 	private ArrayList<Vertice> Q = new ArrayList<>();
 
@@ -134,6 +133,17 @@ public class Grafo {
 		return a.toString();
 	}
 
+	public String getVerticesComGrauUM() {
+		String str = "";
+
+		for (Map.Entry<Integer, Vertice> entry : grafo.entrySet()) {
+			if (entry.getValue().getGrau() == 1)
+				str += "[" + entry.getValue().getNome() + "] ";
+		}
+
+		return str;
+	}
+
 	public void DFS(Vertice G) { // Busca em profundidade
 		tempo = 0;
 		for (Vertice u : G.getVerticesAdjacentes()) {
@@ -212,7 +222,7 @@ public class Grafo {
 				// calcula a distancia em ralação aos outros
 				for (Map.Entry<Integer, Vertice> entry2 : grafo.entrySet()) {
 
-					if (entry2.getValue() != entry.getValue()) {
+					if (entry2.getValue().getGrau() == 1 && entry2.getValue() != entry.getValue()) {
 
 						distancia = calculaDistancia(entry.getValue(), entry2.getValue());
 
@@ -333,7 +343,7 @@ public class Grafo {
 		str += String.format("%5s %5s %10s %25s", "X", "Y", "Vértice", "Distância");
 		str += "\n";
 		str += imprimeDijkstra(destino);
-		str += String.format("%5s %5s %10s %25s", "", "", "Total", total);
+		str += String.format("%5s %5s %10s %25s", "", "", "Total", destino.getDistancia());
 		System.out.println(str);
 
 	}
@@ -343,9 +353,9 @@ public class Grafo {
 		if (v.getPai() != null)
 			str += imprimeDijkstra(v.getPai());
 
-		str += String.format("%5s %5s %10s %25s", v.getX(), v.getY(), "V" + v.getNome(), v.getDistancia());
+		str += String.format("%5s %5s %10s %25s", v.getX(), v.getY(), "V" + v.getNome(),
+				((v.getPai() == null) ? v.getDistancia() : v.getDistancia() - v.getPai().getDistancia()));
 		str += "\n";
-		total += v.getDistancia();
 		return str;
 	}
 

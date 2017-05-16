@@ -19,7 +19,7 @@ public class Principal {
 	private static File f;
 
 	public static void main(String[] args) throws IOException {
-		f = new File("XXXXXXXXXXXXXXX/src/br/furb/trabalho02/teste.txt");
+		f = new File("/home/siena/git/grafos/src/br/furb/trabalho02/teste.txt");
 		b = new BufferedReader(new FileReader(f));
 		Grafo g = new Grafo();
 
@@ -67,12 +67,13 @@ public class Principal {
 			B.AddVerticeAdjacente(A);
 		}
 		g.setDebug(true);
-
+		System.out.println(g.toString());
+		// System.out.println(g.getVerticesComGrauUM());
 		g.normalizarGrafo();
 
-		g.dijkstra(g.getVertice(1), g.getVertice(16));
+		g.dijkstra(g.getVertice(1), g.getVertice(17));
 
-		System.out.println(g.matrizDijkstra());
+		// System.out.println(g.matrizDijkstra());
 	}
 
 }
