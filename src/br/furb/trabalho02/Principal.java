@@ -19,12 +19,19 @@ public class Principal {
 	private static File f;
 
 	public static void main(String[] args) throws IOException {
-		f = new File("/home/siena/git/grafos/src/br/furb/trabalho02/teste.txt");
+		f = new File("XXXXXXXXXXX");
 		b = new BufferedReader(new FileReader(f));
+		String output[];
 		Grafo g = new Grafo();
 
 		String readLine = "";
 		int i = 1;
+
+		// Identifica origem e destino
+		readLine = b.readLine();
+		output = readLine.split(" ");
+		String origem = output[0].replaceAll("\\s+", "").replaceAll("V", "");
+		String destino = output[1].replaceAll("\\s+", "").replaceAll("V", "");
 
 		// Constroi o grafo com os dados do arquivo
 		while ((readLine = b.readLine()) != null) {
@@ -35,7 +42,7 @@ public class Principal {
 			/**
 			 * divide a String (42,3 # 41,1)
 			 */
-			String output[] = readLine.split(Pattern.quote(")("));
+			output = readLine.split(Pattern.quote(")("));
 
 			// remove ( - 42,3
 			String strA = output[0].replaceAll("\\(", "");
@@ -66,14 +73,25 @@ public class Principal {
 			A.AddVerticeAdjacente(B);
 			B.AddVerticeAdjacente(A);
 		}
-		g.setDebug(true);
-		System.out.println(g.toString());
-		// System.out.println(g.getVerticesComGrauUM());
+
+		g.setDebug(false);
+
 		g.normalizarGrafo();
 
-		g.dijkstra(g.getVertice(1), g.getVertice(17));
+		System.out.println("Vértice " + origem + " corresponde ao vértice X: " + g.getVertice(origem).getX() + " Y: "
+				+ g.getVertice(origem).getY());
+		System.out.println("Vértice " + destino + " corresponde ao vértice X: " + g.getVertice(destino).getX() + " Y: "
+				+ g.getVertice(destino).getY());
 
-		// System.out.println(g.matrizDijkstra());
+		/*
+		 * A correlação entre nome e posição dos vértices não correspondem ao do
+		 * trabalho Sugiro que utilize as coordenadas X e Y
+		 */
+
+		// g.dijkstra(g.getVertice(42, 3), g.getVertice(28, 8));
+
+		g.dijkstra(g.getVertice(origem), g.getVertice(destino));
+
 	}
 
 }
